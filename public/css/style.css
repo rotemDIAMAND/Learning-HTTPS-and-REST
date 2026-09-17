@@ -1,0 +1,335 @@
+/* -------------------------------------------------------------------------
+   public/css/style.css
+   Basic, dependency-free styling shared by all pages (store + game).
+------------------------------------------------------------------------- */
+
+:root {
+  --color-bg: #f6f7fb;
+  --color-card: #ffffff;
+  --color-border: #e1e4ec;
+  --color-primary: #3454d1;
+  --color-primary-dark: #24398f;
+  --color-success: #1e824c;
+  --color-success-bg: #e6f6ec;
+  --color-failure: #b3261e;
+  --color-failure-bg: #fdeaea;
+  --color-text: #22252b;
+  --color-muted: #6b7280;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+code, pre {
+  font-family: 'Consolas', 'Courier New', monospace;
+}
+
+/* ---- Header / footer ---------------------------------------------------- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--color-primary);
+  color: white;
+}
+.site-header .brand { color: white; font-weight: bold; font-size: 1.2rem; }
+.site-header nav a { color: white; margin-left: 1.5rem; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+.site-footer {
+  text-align: center;
+  color: var(--color-muted);
+  padding: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.hint {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+/* ---- Store page --------------------------------------------------------- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: end;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+.filter-bar label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+  gap: 0.25rem;
+}
+.filter-bar input, .filter-bar select {
+  padding: 0.4rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+}
+.filter-bar button {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.55rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.filter-bar button:hover { background: var(--color-primary-dark); }
+.clear-link { align-self: center; }
+
+.result-count { color: var(--color-muted); margin-bottom: 1rem; }
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.book-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1rem;
+  display: block;
+  color: var(--color-text);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.book-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+.book-card h3 { margin: 0 0 0.25rem; font-size: 1.05rem; }
+.book-card .author { color: var(--color-muted); margin: 0 0 0.5rem; font-size: 0.9rem; }
+.badge {
+  background: #eef0fb;
+  color: var(--color-primary);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+.book-card .price { font-weight: bold; margin: 0.5rem 0 0; }
+.book-card .stock { font-size: 0.8rem; color: var(--color-muted); }
+
+.back-link { display: inline-block; margin-bottom: 1rem; }
+
+.book-detail {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+.review-list { list-style: none; padding: 0; }
+.review-list li {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.not-found { text-align: center; padding: 3rem 0; }
+.not-found h1 { font-size: 4rem; margin: 0; color: var(--color-primary); }
+
+/* ---- API docs & schemas pages --------------------------------------------- */
+.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.docs-table th, .docs-table td {
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9rem;
+}
+.docs-table th { background: #f0f2f9; }
+.method-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+}
+.method-get { background: #2c7be5; }
+.method-post { background: #1e824c; }
+.method-put { background: #b3792e; }
+.method-patch { background: #8a5cf6; }
+.method-delete { background: #b3261e; }
+
+.schema-list {
+  list-style: none;
+  padding: 0;
+}
+.schema-list li {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.6rem;
+}
+
+/* ---- Game page ----------------------------------------------------------- */
+.game-root {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.mission-list-panel {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1rem;
+  position: sticky;
+  top: 1rem;
+}
+.score-board {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.mission-list { list-style: none; padding: 0; margin: 0; }
+.mission-item {
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+.mission-item:hover:not(.locked) { background: #eef0fb; }
+.mission-item.active { background: var(--color-primary); color: white; }
+.mission-item.completed:not(.active) { color: var(--color-success); }
+.mission-item.locked { color: var(--color-muted); cursor: not-allowed; }
+
+.mission-panel {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.hint-toggle {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.hint-box {
+  background: #fff8e1;
+  border: 1px solid #f0dca0;
+  border-radius: 6px;
+  padding: 0.6rem 0.9rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.request-form { margin-top: 1.25rem; }
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+.form-row label { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.85rem; }
+.request-form select,
+.request-form input[type="text"],
+.request-form textarea {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  font-family: inherit;
+}
+.request-form textarea { font-family: 'Consolas', monospace; }
+.path-preview { font-size: 0.9rem; color: var(--color-muted); }
+
+.query-params-block .query-params-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+.query-params-header button {
+  background: none;
+  border: 1px dashed var(--color-primary);
+  color: var(--color-primary);
+  border-radius: 6px;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+}
+.query-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.query-row button {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#send-request-btn {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.65rem 1.4rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+#send-request-btn:hover { background: var(--color-primary-dark); }
+
+.response-panel {
+  margin-top: 1.5rem;
+  background: #161a23;
+  color: #d7dae0;
+  border-radius: 8px;
+  padding: 1rem;
+}
+.response-panel h3 { margin-top: 0; color: white; }
+.response-panel pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.feedback-box {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.feedback-box.success { background: var(--color-success-bg); color: var(--color-success); }
+.feedback-box.failure { background: var(--color-failure-bg); color: var(--color-failure); }
+
+@media (max-width: 800px) {
+  .game-root { grid-template-columns: 1fr; }
+  .mission-list-panel { position: static; }
+}

@@ -1,0 +1,31 @@
+<%- include('partials/header', { title: 'API Documentation' }) %>
+
+<h1>API Documentation</h1>
+<p class="hint">
+  All endpoints below are mounted under <code>/api</code> and always return JSON.
+  See <a href="/schemas">/schemas</a> for the exact shape of the Book and Review
+  resources returned by these endpoints.
+</p>
+
+<table class="docs-table">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Path</th>
+      <th>Uses</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% endpoints.forEach(function(ep) { %>
+      <tr>
+        <td><span class="method-badge method-<%= ep.method.toLowerCase() %>"><%= ep.method %></span></td>
+        <td><code><%= ep.path %></code></td>
+        <td><%= ep.uses %></td>
+        <td><%= ep.description %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('partials/footer') %>

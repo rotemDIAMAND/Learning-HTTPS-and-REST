@@ -1,0 +1,32 @@
+<%- include('partials/header', { title: book.title + ' - Books Store' }) %>
+
+<a class="back-link" href="/store">&larr; Back to catalog</a>
+
+<article class="book-detail">
+  <h1><%= book.title %></h1>
+  <p class="author">by <%= book.author %></p>
+  <p class="meta">
+    <span class="badge"><%= book.category %></span>
+    &middot; Published <%= book.year %>
+    &middot; ⭐ <%= book.rating %>
+  </p>
+  <p class="price">$<%= book.price %></p>
+  <p class="stock"><%= book.stock > 0 ? book.stock + ' in stock' : 'Out of stock' %></p>
+</article>
+
+<section class="reviews">
+  <h2>Reviews (<%= reviews.length %>)</h2>
+  <% if (reviews.length === 0) { %>
+    <p class="hint">No reviews yet for this book.</p>
+  <% } %>
+  <ul class="review-list">
+    <% reviews.forEach(function(review) { %>
+      <li>
+        <strong><%= review.user %></strong> - ⭐ <%= review.rating %>
+        <p><%= review.comment %></p>
+      </li>
+    <% }) %>
+  </ul>
+</section>
+
+<%- include('partials/footer') %>

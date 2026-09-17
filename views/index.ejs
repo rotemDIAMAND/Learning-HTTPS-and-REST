@@ -1,0 +1,66 @@
+<%- include('partials/header', { title: 'Books Store' }) %>
+
+<h1>Store catalog</h1>
+<p class="hint">
+  This page is rendered on the server (SSR). Use the filters below - they are sent to the
+  server as a normal <code>GET</code> request with query parameters
+  (e.g. <code>/?category=Fantasy&amp;sort=price_asc</code>), and the HTML you see is
+  built again on the server with the filtered results.
+</p>
+
+<form class="filter-bar" method="GET" action="/store">
+  <label>
+    Category
+    <select name="category">
+      <option value="">All</option>
+      <% categories.forEach(function(cat) { %>
+        <option value="<%= cat %>" <%= filters.category === cat ? 'selected' : '' %>><%= cat %></option>
+      <% }) %>
+    </select>
+  </label>
+
+  <label>
+    Search title
+    <input type="text" name="search" value="<%= filters.search || '' %>" placeholder="e.g. dune" />
+  </label>
+
+  <label>
+    Min price
+    <input type="number" name="minPrice" value="<%= filters.minPrice || '' %>" min="0" />
+  </label>
+
+  <label>
+    Max price
+    <input type="number" name="maxPrice" value="<%= filters.maxPrice || '' %>" min="0" />
+  </label>
+
+  <label>
+    Sort by
+    <select name="sort">
+      <option value="">-</option>
+      <option value="price_asc" <%= filters.sort === 'price_asc' ? 'selected' : '' %>>Price ↑</option>
+      <option value="price_desc" <%= filters.sort === 'price_desc' ? 'selected' : '' %>>Price ↓</option>
+      <option value="rating_desc" <%= filters.sort === 'rating_desc' ? 'selected' : '' %>>Rating ↓</option>
+      <option value="title_asc" <%= filters.sort === 'title_asc' ? 'selected' : '' %>>Title A-Z</option>
+    </select>
+  </label>
+
+  <button type="submit">Apply filters</button>
+  <a class="clear-link" href="/store">Clear</a>
+</form>
+
+<p class="result-count"><%= books.length %> book(s) found</p>
+
+<div class="book-grid">
+  <% books.forEach(function(book) { %>
+    <a class="book-card" href="/store/<%= book.id %>">
+      <h3><%= book.title %></h3>
+      <p class="author">by <%= book.author %></p>
+      <p class="meta"><span class="badge"><%= book.category %></span> &middot; ⭐ <%= book.rating %></p>
+      <p class="price">$<%= book.price %></p>
+      <p class="stock"><%= book.stock > 0 ? book.stock + ' in stock' : 'Out of stock' %></p>
+    </a>
+  <% }) %>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,81 @@
+<%- include('partials/header', { title: 'HTTP Training Game' }) %>
+
+<h1>HTTP Request Game</h1>
+<p class="hint">
+  Each level gives you a mission written in plain language. Your job is to build the
+  correct HTTP request - pick the right <strong>method</strong>, fill in the
+  <strong>route parameter</strong> (when the path needs one), add
+  <strong>query parameters</strong>, and/or write a JSON <strong>request body</strong> -
+  then hit "Send request". The request is a <em>real</em> AJAX call to this server's
+  REST API (<code>/api/books...</code>). Read the response carefully: the status code
+  and JSON body tell you whether you succeeded.
+</p>
+
+<div id="game-root" class="game-root">
+  <aside class="mission-list-panel">
+    <div class="score-board">
+      Score: <span id="score">0</span> / <span id="max-score">0</span>
+    </div>
+    <ol id="mission-list" class="mission-list"></ol>
+  </aside>
+
+  <section class="mission-panel">
+    <h2 id="mission-title"></h2>
+    <p id="mission-task"></p>
+    <button id="hint-toggle" type="button" class="hint-toggle">Show hint</button>
+    <p id="mission-hint" class="hint-box" hidden></p>
+
+    <form id="request-form" class="request-form">
+      <div class="form-row">
+        <label>
+          Method
+          <select id="method-select" name="method">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="PATCH">PATCH</option>
+            <option value="DELETE">DELETE</option>
+          </select>
+        </label>
+        <span class="path-preview">Path: <code id="path-preview"></code></span>
+      </div>
+
+      <div id="route-param-row" class="form-row" hidden>
+        <label>
+          Route parameter (<span id="route-param-name"></span>)
+          <input type="text" id="route-param-input" placeholder="e.g. 3" />
+        </label>
+      </div>
+
+      <div class="form-row query-params-block">
+        <div class="query-params-header">
+          <span>Query parameters</span>
+          <button type="button" id="add-query-row">+ add parameter</button>
+        </div>
+        <div id="query-param-rows"></div>
+      </div>
+
+      <div id="body-row" class="form-row" hidden>
+        <label>
+          Request body (JSON)
+          <textarea id="body-input" rows="6" placeholder='{ "title": "..." }'></textarea>
+        </label>
+      </div>
+
+      <button type="submit" id="send-request-btn">Send request</button>
+    </form>
+
+    <div class="response-panel">
+      <h3>Response</h3>
+      <p>Status: <span id="response-status">-</span></p>
+      <pre id="response-body">-</pre>
+    </div>
+
+    <div id="feedback-box" class="feedback-box" hidden></div>
+  </section>
+</div>
+
+<script src="/js/missions.js"></script>
+<script src="/js/game.js" defer></script>
+
+<%- include('partials/footer') %>

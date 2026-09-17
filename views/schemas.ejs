@@ -1,0 +1,20 @@
+<%- include('partials/header', { title: 'API Schemas' }) %>
+
+<h1>API Schemas</h1>
+<p class="hint">
+  These are <a href="https://json-schema.org/" target="_blank" rel="noopener">JSON Schema</a>
+  documents describing the exact shape of each resource returned by the REST API
+  (field names, types, and which fields are required). Click a schema below to
+  view its raw JSON document.
+</p>
+
+<ul class="schema-list">
+  <% schemas.forEach(function(schema) { %>
+    <li>
+      <a href="<%= schema.path %>"><code><%= schema.path %></code></a>
+      &mdash; <%= schema.name %>: <%= schema.description %>
+    </li>
+  <% }) %>
+</ul>
+
+<%- include('partials/footer') %>
